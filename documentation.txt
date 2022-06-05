@@ -1,0 +1,30 @@
+This is the documentation for a test application for Soteria. 
+The job asked for a web api to do basic CRUD opperations against a Cosmos DB. And to have the application published as a serverless application using Azure Functions. 
+
+These are rough documentation steps that I used to achieve this.
+
+
+1) Created a new ASP.NET Core Web API project using Visual Studio 2019 Enterprise
+2) Implemented methods/logic in new PetController (guts of it coppied from template WeatherForecastController)
+3) With the controller actions completed, I needed to connect to a service layer and actually write to a database.
+4) Looked up connecting to a Cosmos DB from this site: https://www.codeproject.com/Articles/1230818/Creating-a-Serverless-REST-API-with-Cosmos-DB-on-A
+5) Looked up setting up a new Azure Cosmos DB from this site: https://www.sqlshack.com/start-your-journey-with-azure-cosmos-db/
+6) Created new Azure account here: https://azure.microsoft.com/en-us/free/ (this doesn't look to be free...must downgrade account later?)
+7) Cosmos database tutorial: https://docs.microsoft.com/en-us/azure/cosmos-db/sql/sql-api-dotnet-application
+8) Added a unit test project and wrote unit test for CRUD controller methods.
+	I hit snags when trying to create(initial write) to the database, was hitting some async problems, so I looked up a solution here: https://docs.microsoft.com/en-us/archive/msdn-magazine/2014/november/async-programming-unit-testing-asynchronous-code
+	This caused me to create the Controller method as a Task rather than a void, not 100% sure if this is the right approach.
+9) After getting the web api to connect to Cosmos and write through the unit tests correctly, I next needed to start pushing it to Azure Functions.
+	And then, realized that I needed to creat a whole new solution of type Azure function. 
+
+10) I tried to create a Azure Functions application in Visual Studio 2019 Community edition, and was getting errors. 
+	Downloaded VS 22 Community Edition and installed it. 
+11) Created a Azure Function application according to this tutorial: https://docs.microsoft.com/en-us/azure/azure-functions/openapi-apim-integrate-visual-studio
+	Then published it to my Azure account in a function.
+
+12) I'm going to check this into github now. It may not be exactly what y'all are wanting, but I think I did everything, and it should be close. feel free to call/email if you want clarification. 
+
+-Brian
+
+Note, the appsettings.json files contain the keys for the cosmos url and primary key. I didn't check in my real values, as I don't want them out on a public repo.
+
